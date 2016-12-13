@@ -27,18 +27,26 @@ plt.ylabel("grade")
 plt.show()
 ################################################################################
 
+from time import time
 
-### your code here!  name your classifier object clf if you want the 
+print 'Starting'
+
+### your code here!  name your classifier object clf if you want the
+from sklearn.ensemble import AdaBoostClassifier
+clf = AdaBoostClassifier()
+clf.fit(features_train, labels_train)
+
+t0 = time()
+clf.fit(features_train, labels_train)
+print "training time:", round(time()-t0, 3), "s"
+
+t1 = time()
+pred = clf.predict(features_test)
+print "predicting time:", round(time()-t1, 3), "s"
+
+from sklearn.metrics import accuracy_score
+print 'accuracy: ', accuracy_score(labels_test, pred)
+
 ### visualization code (prettyPicture) to show you the decision boundary
 
-
-
-
-
-
-
-
-try:
-    prettyPicture(clf, features_test, labels_test)
-except NameError:
-    pass
+prettyPicture(clf, features_test, labels_test)
